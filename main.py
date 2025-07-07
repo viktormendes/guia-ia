@@ -3,8 +3,17 @@ from pydantic import BaseModel
 from typing import List, Optional
 import json
 import copy
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="API de Planejamento Curricular", version="1.0.0")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://guia-do-aluno.vercel.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Modelos Pydantic para validação
 class Timetable(BaseModel):
